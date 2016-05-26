@@ -5,7 +5,7 @@ from django.conf import settings
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 from .serializers import (
     ReportNestedSerializer, ReportSerializer, FormatSerializer,
     FilterFieldSerializer)
@@ -25,23 +25,27 @@ def find_exact_position(fields_list, item):
 
 
 class FormatViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = Format.objects.all()
     serializer_class = FormatSerializer
     pagination_class = None
 
 
 class FilterFieldViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = FilterField.objects.all()
     serializer_class = FilterFieldSerializer
 
 
 class ReportViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = Report.objects.all()
     serializer_class = ReportSerializer
     pagination_class = None
 
 
 class ReportNestedViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = Report.objects.all()
     serializer_class = ReportNestedSerializer
     pagination_class = None
@@ -57,7 +61,7 @@ class RelatedFieldsView(GetFieldsMixin, APIView):
 
     """ Get related fields from an ORM model
     """
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsAuthenticated,)
 
     def get_data_from_request(self, request):
         self.model = request.data['model']
@@ -117,7 +121,7 @@ class FieldsView(RelatedFieldsView):
 
     """ Get direct fields and properties on an ORM model
     """
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request):
         self.get_data_from_request(request)
@@ -235,7 +239,7 @@ class FieldsView(RelatedFieldsView):
 
 
 class GenerateReport(DataExportMixin, APIView):
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request, report_id=None):
         return self.post(request, report_id=report_id)
