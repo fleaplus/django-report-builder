@@ -93,7 +93,7 @@ def email_report(report_url, user):
 
 class DownloadFileView(DataExportMixin, View):
 
-    @method_decorator(staff_member_required)
+    @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(DownloadFileView, self).dispatch(*args, **kwargs)
 
