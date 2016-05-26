@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from django.config.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 from rest_framework import routers
 from . import views
 from .api import views as api_views
