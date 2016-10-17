@@ -5,4 +5,5 @@ Werkzeug
 ipdb
 celery[redis]
 flake8
-django-money==0.7.0
+django-money==0.9.1
+djangorestframework==3.4.3
