@@ -43,7 +43,7 @@ class ContentTypeViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = ContentType.objects.all()
     serializer_class = ContentTypeSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsAuthenticated,)
 
 
 class ReportViewSet(viewsets.ModelViewSet):
