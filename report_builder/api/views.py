@@ -44,6 +44,7 @@ class ContentTypeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = ContentType.objects.all()
     serializer_class = ContentTypeSerializer
     permission_classes = (IsAuthenticated,)
+    pagination_class = None
 
 
 class ReportViewSet(viewsets.ModelViewSet):
